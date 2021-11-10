@@ -1,18 +1,26 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <div>
+    <h1>Counter</h1>
+    <p>{{ counter }}</p>
+    <button @click="store.addOne">Add one</button>
+    <button @click="store.reset">Reset</button>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import { useCounterStore } from "@/store/useCounter";
+import { storeToRefs } from "pinia";
 
 export default defineComponent({
-  name: "Home",
-  components: {
-    HelloWorld,
+  setup() {
+    const store = useCounterStore();
+    const { counter } = storeToRefs(store);
+
+    return {
+      store,
+      counter,
+    };
   },
 });
 </script>
