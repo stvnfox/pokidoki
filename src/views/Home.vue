@@ -1,26 +1,29 @@
 <template>
   <div>
-    <h1>Counter</h1>
-    <p>{{ counter }}</p>
-    <button @click="store.addOne">Add one</button>
-    <button @click="store.reset">Reset</button>
+    <h1>SNKRT</h1>
+    <featured :items="store.featuredItems"/>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useCounterStore } from "@/store/useCounter";
+import { useStore } from "@/store/useShop";
 import { storeToRefs } from "pinia";
+import Featured from "@/components/Featured.vue"
 
 export default defineComponent({
+  components: {
+    Featured
+  },
   setup() {
-    const store = useCounterStore();
-    const { counter } = storeToRefs(store);
+    const store = useStore();
 
     return {
       store,
-      counter,
     };
   },
+  mounted() {
+    this.store.getFeaturedItems(12);
+  }
 });
 </script>
