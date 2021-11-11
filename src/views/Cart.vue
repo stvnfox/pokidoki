@@ -2,11 +2,12 @@
     <section>
         <h1>Cart</h1>
         <div class="card-row">
-            <cart-item
+            <product
                 v-for="(item, index) in store.cart"
                 :key="item.id"
-                :item="item"
+                :product="item"
                 :index="index"
+                cart
             />
         </div>
     </section>
@@ -15,11 +16,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore } from '@/store/useShop';
-import CartItem from '@/components/CartItem.vue';
+import Product from '@/components/Product.vue';
 
 export default defineComponent({
     components: {
-        CartItem,
+        Product,
     },
     setup() {
         const store = useStore();

@@ -1,8 +1,8 @@
 import { IProducts } from "@/interfaces/IProducts";
 import axios from "axios";
 
-export default new class FeaturedItemsService {
-    getFeaturedItems(limit: number): Promise<IProducts> {
+export default new class ProductsService {
+    getItems(limit: number): Promise<IProducts> {
         return axios.get('https://the-sneaker-database.p.rapidapi.com/sneakers', {
             params: {
                 limit

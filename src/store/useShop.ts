@@ -1,27 +1,34 @@
 import { defineStore } from "pinia";
 import { IProduct } from "@/interfaces/IProduct";
-import featuredItemsService from "@/services/featuredItemsService";
-import { IProducts } from "@/interfaces/IProducts";
+import productsService from "@/services/productsService";
 
 export const useStore = defineStore("main", {
     state: () => ({
-        results: {} as IProducts,
         products: [] as IProduct[],
-        featuredItems: [] as IProduct[],
         cart: [] as IProduct[],
+        pageSize: 0,
+        more: 9
     }),
     getters: {
+        featuredItems(state) {
+            const featuredItems = state.products.filter(product => product.image.original !== "").splice(4);
+            return featuredItems;
+        },
+        productsWithImage(state) {
+            const filteredProducts = state.products.filter(product => product.image.original !== "");
+            return filteredProducts;
+        },
     },
     actions: {
-        async getFeaturedItems(take: number) {
-            const { results } = await featuredItemsService.getFeaturedItems(take);
-            this.featuredItems = results
+        async getProducts(take: number) {
+            const { results } = await productsService.getItems(take);
+            this.products = results
         },
         addToCart(value: IProduct) {
             this.cart.push(value);
         },
         removeFromCart(value: number) {
             this.cart.splice(value);
-        },
+        }, 
     }
 })

@@ -8,7 +8,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useStore } from "@/store/useShop";
-import { storeToRefs } from "pinia";
 import Featured from "@/components/Featured.vue"
 
 export default defineComponent({
@@ -23,7 +22,7 @@ export default defineComponent({
     };
   },
   mounted() {
-    this.store.getFeaturedItems(12);
+    this.store.getProducts(10);
   }
 });
 </script>
