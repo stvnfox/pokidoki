@@ -27,5 +27,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### TODO: 
     - Spinner when loading data
     - Filter on type/set
+    - Chevron up icon when filter is open
+    - Search in filters
     - Pagination
     - Detail page

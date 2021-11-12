@@ -1,5 +1,5 @@
 <template>
-    <form class="searchbar pt-5" @submit.prevent="getSearchResults">
+    <form class="searchbar py-5" @submit.prevent="getSearchResults">
         <input
             v-model="searchTerm"
             type="text"
