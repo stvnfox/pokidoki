@@ -1,13 +1,11 @@
 <template>
-    <section class="container">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 py-5">
-            <product
-                v-for="item in items"
-                :key="item.id"
-                :product="item"
-            />
-        </div>
-    </section>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 py-5">
+        <product
+            v-for="item in items"
+            :key="item.id"
+            :product="item"
+        />
+    </div>
 </template>
 
 <script lang="ts">

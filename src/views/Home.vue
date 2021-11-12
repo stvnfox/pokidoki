@@ -4,17 +4,28 @@
       <searchbar/>
     </div>
   </div>
-  <results :items="store.products"/>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+        <filters :types="store.filters.types" :sets="store.filters.sets"/>
+      </div>
+      <div class="col-lg-10">
+        <results :items="store.products"/>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useStore } from "@/store/useShop";
+import Filters from "@/components/Filters.vue";
 import Results from "@/components/Results.vue";
 import Searchbar from "@/components/Searchbar.vue";
 
 export default defineComponent({
   components: {
+    Filters,
     Results,
     Searchbar
   },
@@ -23,9 +34,10 @@ export default defineComponent({
 
     return {
       store,
-    };
+    }
   },
   mounted() {
+    this.store.getFilters();
     this.store.getProducts(12);
   }
 });
