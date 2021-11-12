@@ -1,15 +1,25 @@
-import { IProducts } from "@/interfaces/IProducts";
+import { IProduct } from "@/interfaces/IProduct";
 import axios from "axios";
 
+interface IResult {
+    data: IProduct[];
+    page: number;
+    pageSize: number;
+    count: number;
+    totalCount: number;
+}
+interface IParams {
+    q?: string,
+    page?: number,
+    pageSize: number
+}
+
 export default new class ProductsService {
-    getItems(limit: number): Promise<IProducts> {
-        return axios.get('https://the-sneaker-database.p.rapidapi.com/sneakers', {
-            params: {
-                limit
-            },
+    getItems(params: IParams): Promise<IResult> {
+        return axios.get('https://api.pokemontcg.io/v2/cards/', {
+            params: params,
             headers: {
-                'x-rapidapi-host': 'the-sneaker-database.p.rapidapi.com',
-                'x-rapidapi-key': 'c4fa14a479msh12d7fa74e19af35p13fe76jsnca3fa07ef864'
+                "X-Api-Key": "816a620f-4498-45ff-b94b-e88fd72c0a1f"
             }
         }).then(results => results.data)
     }

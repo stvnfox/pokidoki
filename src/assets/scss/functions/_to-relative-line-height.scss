@@ -1,0 +1,8 @@
+@use "sass:math";
+
+@function to-relative-line-height($line-height, $font-size) {
+    @if (unit($font-size) == 'px') {
+        $font-size: px-to-rem($font-size);
+    }
+    @return math.div(px-to-rem($line-height), $font-size);
+}

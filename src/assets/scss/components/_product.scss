@@ -1,0 +1,14 @@
+.product {
+    img {
+        height: 350px;
+        width: auto;
+        object-fit: contain;
+    }
+
+    .card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: $gray-200;
+    }
+}

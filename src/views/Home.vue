@@ -1,18 +1,22 @@
 <template>
-  <div>
-    <h1>SNKRT</h1>
-    <featured :items="store.featuredItems"/>
+  <div class="container">
+    <div class="search-options row">
+      <searchbar/>
+    </div>
   </div>
+  <results :items="store.products"/>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useStore } from "@/store/useShop";
-import Featured from "@/components/Featured.vue"
+import Results from "@/components/Results.vue";
+import Searchbar from "@/components/Searchbar.vue";
 
 export default defineComponent({
   components: {
-    Featured
+    Results,
+    Searchbar
   },
   setup() {
     const store = useStore();
@@ -22,7 +26,7 @@ export default defineComponent({
     };
   },
   mounted() {
-    this.store.getProducts(10);
+    this.store.getProducts(12);
   }
 });
 </script>

@@ -22,3 +22,10 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### TODO: 
+    - Spinner when loading data
+    - Filter on type/set
+    - Pagination
+    - Detail page

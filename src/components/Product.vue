@@ -1,31 +1,39 @@
 <template>
-    <div class="product">
-        <img v-if="product.image.original !== ''" :src="product.image.thumbnail" :alt="product.name">
-        <h2 v-text="product.name" />
-        <div class="product-cta">
-            <p>
-                €{{ product.retailPrice }},-
-            </p>
-            <button @click="cart ? store.removeFromCart(product) : store.addToCart(product)">
-                {{ cart ? 'Remove from' : 'Add to'}} cart
-            </button>
+    <div class="col product">
+        <div class="card pt-4">
+            <img :src="product.images.small" :alt="product.name">
+            <div class="card-body">
+                <h2 class="text-center" v-text="product.name" />
+            </div>
+            <div class="card-footer py-3">
+                <h3 class="mb-0">
+                    € {{ Math.ceil(product.cardmarket.prices.trendPrice) }},-
+                </h3>
+                <button
+                    class="btn btn-secondary"
+                    @click="cart ? store.removeFromCart(index) : store.addToCart(product)"
+                >
+                    {{ cart ? 'Remove from' : 'Add to' }} cart
+                </button>
+            </div>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import { useStore } from '@/store/useShop'
+import { IProduct } from '@/interfaces/IProduct';
 
 export default defineComponent({
     props: {
         product: {
-            type: Object,
+            type: Object as PropType<IProduct>,
             required: true
         },
         index: {
             type: Number,
-            default: 0
+            default: null
         },
         cart: {
             type: Boolean,
@@ -41,19 +49,3 @@ export default defineComponent({
     },
 })
 </script>
-
-
-<style scoped lang="scss">
-.product {
-    img {
-        height: 200px;
-        width: 200px;
-    }
-
-    &-cta {
-        display: flex;
-        justify-content: space-between;
-        margin: 0 4rem;
-    }
-}
-</style>
