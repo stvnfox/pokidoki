@@ -7,7 +7,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-2">
-        <filters :types="store.filters.types" :sets="store.filters.sets"/>
+        <filters/>
       </div>
       <div class="col-lg-10">
         <results :items="store.products"/>
@@ -37,7 +37,6 @@ export default defineComponent({
     }
   },
   mounted() {
-    this.store.getFilters();
     this.store.getProducts(12);
   }
 });

@@ -31,6 +31,39 @@
                 overflow-y: scroll;
                 overflow-x: hidden;
             }
+
+            &-search {
+                display: flex;
+                align-items: center;
+                border: 1px solid $gray-300;
+                border-radius: $border-radius;
+                width: 100%;
+
+                input {
+                    border: none;
+                    padding: px-to-rem(8px);
+                    width: 100%;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                .btn {
+                    display: flex;
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+
+                    svg {
+                        width: px-to-rem(24px);
+                        height: px-to-rem(24px);
+                    }
+
+                    &:active {
+                        box-shadow: none;
+                    }
+                }
+            }
         }
     }
 }
