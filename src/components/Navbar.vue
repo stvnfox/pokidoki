@@ -2,7 +2,7 @@
     <section class="nav">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="h1">
-                PKMN
+                <a href="/">PKMN</a>
             </div>
             <div class="nav__cta">
                 <router-link v-for="link in store.menuItems" :key="link" :to="link.url">

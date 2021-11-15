@@ -17,8 +17,8 @@
             </button>
             <div id="types" class="collapse show filters__type-items">
                 <div v-for="type in store.filters.types" :key="type" class="filters__type-items-item">
-                    <input :id="type" type="checkbox">
-                    <label :for="type">{{ type }}</label>
+                    <input :id="type.name" :checked="type.checked" type="checkbox" @change="updateTypeFilter(type)">
+                    <label :for="type.name">{{ type.name }}</label>
                 </div>
             </div>
         </div>
@@ -57,8 +57,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from 'vue';
-import { useStore } from '@/store/useShop';
+import { defineComponent, computed, ref, toRefs } from 'vue';
+import { useStore, IType } from '@/store/useShop';
 
 export default defineComponent({
     setup() {
@@ -69,10 +69,15 @@ export default defineComponent({
             return store.filters.sets.filter((set) => set.name.toLowerCase().includes(searchSets.value.toLowerCase()));
         })
 
+        function updateTypeFilter(type: IType) {
+            store.changeCheckedValue(type);
+        }
+
         return {
             searchSets,
             store,
-            matchingSets
+            matchingSets,
+            updateTypeFilter
         }
     },
     mounted() {

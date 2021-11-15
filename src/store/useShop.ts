@@ -4,15 +4,24 @@ import productsService from "@/services/productsService";
 import filterService from "@/services/filterService";
 import { ISet } from "@/interfaces/ISet";
 
+export interface IType {
+    name: string;
+    checked: boolean;
+}
+
 export const useStore = defineStore("main", {
     state: () => ({
         products: [] as IProduct[],
         filters: {
-            types: [] as string[],
+            types: [] as IType[],
             sets: [] as ISet[],
         },
         cart: [] as IProduct[],
+        activeFilter: [] as any[],
     }),
+    getters: {
+        checkedFilters: (state) => state.filters.types.filter(filter => filter.checked)
+    },
     actions: {
         async getProducts(amount: number, query?: string, page?: number) {
             const results = await productsService.getItems({
@@ -23,10 +32,18 @@ export const useStore = defineStore("main", {
             .then(result => this.products = result.data);
         },
         async getFilters() {
-            const types = await filterService.getTypes()
-            .then(result => this.filters.types = result.data);
+            this.filters.types = await filterService.getTypes()
+            .then(result => {
+                return result.data.map((filters: string) => ({
+                    name: filters,
+                    checked: false
+                }))
+            });
             const sets = await filterService.getSets()
             .then(result => this.filters.sets = result.data)
+        },
+        changeCheckedValue(filter: IType) {
+            filter.checked = !filter.checked;
         },
         addToCart(value: IProduct) {
             this.cart.push(value);

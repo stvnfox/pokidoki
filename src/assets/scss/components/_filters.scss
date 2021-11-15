@@ -66,4 +66,23 @@
             }
         }
     }
+
+    &__active {
+        display: flex;
+
+        .btn {
+            display: flex;
+            align-items: center;
+            width: fit-content;
+            font-weight: $font-weight-bold;
+            margin-right: px-to-rem(8px);
+            margin-bottom: px-to-rem(8px);
+
+            svg {
+                height: px-to-rem(20px);
+                width: px-to-rem(20px);
+                margin-left: px-to-rem(8px);
+            }
+        }
+    }
 }
