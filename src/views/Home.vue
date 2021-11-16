@@ -11,7 +11,15 @@
       </div>
       <div class="col-lg-10">
         <results :items="store.products"/>
-      </div>
+        <div class="uiv">
+          <pagination
+            v-model="store.page"
+            :total-page="store.total / 12"
+            class="mb-5"
+            @change="store.changePage(store.page, store.query)"
+          />
+        </div>
+        </div>
     </div>
   </div>
 </template>
@@ -33,11 +41,11 @@ export default defineComponent({
     const store = useStore();
 
     return {
-      store,
+      store
     }
   },
   mounted() {
-    this.store.getProducts(12);
+    this.store.getProducts(12, this.store.query, 1)
   }
 });
 </script>

@@ -5,7 +5,7 @@
             <div class="card-body">
                 <h2 class="text-center" v-text="product.name" />
             </div>
-            <div class="card-footer py-3">
+            <div v-if="product.cardmarket" class="card-footer py-3">
                 <h3 class="mb-0">
                     € {{ Math.ceil(product.cardmarket.prices.trendPrice) }},-
                 </h3>
@@ -15,6 +15,9 @@
                 >
                     {{ cart ? 'Remove from' : 'Add to' }} cart
                 </button>
+            </div>
+            <div v-else class="card-footer py-3">
+                <h3 class="mb-0">Not for sale</h3>
             </div>
         </div>
     </div>

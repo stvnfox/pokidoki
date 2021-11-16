@@ -3,6 +3,7 @@ import { IProduct } from "@/interfaces/IProduct";
 import productsService from "@/services/productsService";
 import filterService from "@/services/filterService";
 import { ISet } from "@/interfaces/ISet";
+import { ref } from "vue";
 
 export interface IType {
     name: string;
@@ -22,24 +23,31 @@ export const useStore = defineStore("main", {
         },
         cart: [] as IProduct[],
         activeFilter: [] as any[],
+        query: ref(''),
+        page: ref(1),
+        total: ref(1)
     }),
     getters: {
         checkedFilters: (state) => {
             const typeFilters = state.filters.types.filter(filter => filter.checked);
             const setFilters = state.filters.sets.filter(filter => filter.checked);
             const filters = [...typeFilters, ...setFilters];
-            
+
             return filters;
         }
     },
     actions: {
-        async getProducts(amount: number, query?: string, page?: number) {
+        async getProducts(amount?: number, query?: string, page?: number) {
             const results = await productsService.getItems({
                 q: query ? `name:${query}*` : undefined,
                 page: page ? page : undefined,
-                pageSize: amount
+                pageSize: amount ? amount : undefined
             })
-            .then(result => this.products = result.data);
+            .then(result => {
+                this.products = result.data;
+                this.page = result.page;
+                this.total = result.totalCount;
+            });
         },
         async getFilters() {
             this.filters.types = await filterService.getTypes()
@@ -56,6 +64,9 @@ export const useStore = defineStore("main", {
                     checked: false
                 }))
             });
+        },
+        changePage(page: number, query: string) {
+            this.getProducts(12, query, page);
         },
         changeCheckedValue(filter: IType | ISetWChecked) {
             filter.checked = !filter.checked;

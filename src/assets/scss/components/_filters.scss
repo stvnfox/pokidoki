@@ -69,6 +69,10 @@
 
     &__active {
         display: flex;
+        position: sticky;
+        top: 17.2rem;
+        z-index: $zindex-fixed;
+        background: $gray-100;
 
         .btn {
             display: flex;
