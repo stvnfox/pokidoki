@@ -9,18 +9,28 @@ export interface IType {
     checked: boolean;
 }
 
+export interface ISetWChecked extends ISet {
+    checked: boolean;
+}
+
 export const useStore = defineStore("main", {
     state: () => ({
         products: [] as IProduct[],
         filters: {
             types: [] as IType[],
-            sets: [] as ISet[],
+            sets: [] as ISetWChecked[]
         },
         cart: [] as IProduct[],
         activeFilter: [] as any[],
     }),
     getters: {
-        checkedFilters: (state) => state.filters.types.filter(filter => filter.checked)
+        checkedFilters: (state) => {
+            const typeFilters = state.filters.types.filter(filter => filter.checked);
+            const setFilters = state.filters.sets.filter(filter => filter.checked);
+            const filters = [...typeFilters, ...setFilters];
+            
+            return filters;
+        }
     },
     actions: {
         async getProducts(amount: number, query?: string, page?: number) {
@@ -39,10 +49,15 @@ export const useStore = defineStore("main", {
                     checked: false
                 }))
             });
-            const sets = await filterService.getSets()
-            .then(result => this.filters.sets = result.data)
+            this.filters.sets = await filterService.getSets()
+            .then(result => {
+                return result.data.map((filters: ISet) => ({
+                    ...filters,
+                    checked: false
+                }))
+            });
         },
-        changeCheckedValue(filter: IType) {
+        changeCheckedValue(filter: IType | ISetWChecked) {
             filter.checked = !filter.checked;
         },
         addToCart(value: IProduct) {

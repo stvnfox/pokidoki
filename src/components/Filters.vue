@@ -47,7 +47,7 @@
                 </div>
                 <div class="filters__type-items scrollable">
                     <div v-for="set in matchingSets" :key="set.id" class="filters__type-items-item">
-                        <input :id="set.name" type="checkbox">
+                        <input :id="set.name" :checked="set.checked" type="checkbox" @change="updateSetFilter(set)">
                         <label :for="set.name">{{ set.name }}</label>
                     </div>
                 </div>
@@ -57,8 +57,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, toRefs } from 'vue';
-import { useStore, IType } from '@/store/useShop';
+import { defineComponent, computed, ref } from 'vue';
+import { useStore, IType, ISetWChecked } from '@/store/useShop';
 
 export default defineComponent({
     setup() {
@@ -73,10 +73,15 @@ export default defineComponent({
             store.changeCheckedValue(type);
         }
 
+        function updateSetFilter(set: ISetWChecked) {
+            store.changeCheckedValue(set);
+        }
+
         return {
             searchSets,
             store,
             matchingSets,
+            updateSetFilter,
             updateTypeFilter
         }
     },
