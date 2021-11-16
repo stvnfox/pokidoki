@@ -26,6 +26,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### TODO: 
     - Spinner when loading data
-    - Filter on type/set
-    - Pagination
+    - Sort results on price/name/date
     - Detail page

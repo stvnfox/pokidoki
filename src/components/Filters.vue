@@ -17,7 +17,7 @@
             </button>
             <div id="types" class="collapse show filters__type-items">
                 <div v-for="type in store.filters.types" :key="type" class="filters__type-items-item">
-                    <input :id="type.name" :checked="type.checked" type="checkbox" @change="updateTypeFilter(type)">
+                    <input :id="type.name" :checked="type.checked" type="radio" @change="updateTypeFilter(type)">
                     <label :for="type.name">{{ type.name }}</label>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="filters__type-items scrollable">
                     <div v-for="set in matchingSets" :key="set.id" class="filters__type-items-item">
-                        <input :id="set.name" :checked="set.checked" type="checkbox" @change="updateSetFilter(set)">
+                        <input :id="set.name" :checked="set.checked" type="radio" @change="updateSetFilter(set)">
                         <label :for="set.name">{{ set.name }}</label>
                     </div>
                 </div>
@@ -58,7 +58,8 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue';
-import { useStore, IType, ISetWChecked } from '@/store/useShop';
+import { useStore, IType } from '@/store/useShop';
+import { ISetWChecked } from '@/interfaces/ISet';
 
 export default defineComponent({
     setup() {
@@ -70,11 +71,11 @@ export default defineComponent({
         })
 
         function updateTypeFilter(type: IType) {
-            store.changeCheckedValue(type);
+            store.changeCheckedTypeValue(type);
         }
 
         function updateSetFilter(set: ISetWChecked) {
-            store.changeCheckedValue(set);
+            store.changeCheckedSetValue(set);
         }
 
         return {

@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { IProduct } from "@/interfaces/IProduct";
 import productsService from "@/services/productsService";
 import filterService from "@/services/filterService";
-import { ISet } from "@/interfaces/ISet";
+import { ISet, ISetWChecked } from "@/interfaces/ISet";
 import { ref } from "vue";
 
 export interface IType {
@@ -10,8 +10,20 @@ export interface IType {
     checked: boolean;
 }
 
-export interface ISetWChecked extends ISet {
-    checked: boolean;
+const searchParamsMapper = (searchQuery: string, typeFilter: IType[], setFilter: ISetWChecked[]): string => {
+    const searchParamsEntries :string[] = [];
+
+    if (searchQuery) {
+        searchParamsEntries.push(`name:${searchQuery}`);
+    }
+    if (typeFilter.length > 0) {
+        searchParamsEntries.push(`types:${typeFilter[0].name}`);
+    }
+    if (setFilter.length > 0) {
+        searchParamsEntries.push(`set.id:${setFilter[0].id}`);
+    }
+
+    return searchParamsEntries.join(' ');
 }
 
 export const useStore = defineStore("main", {
@@ -25,6 +37,7 @@ export const useStore = defineStore("main", {
         activeFilter: [] as any[],
         query: ref(''),
         page: ref(1),
+        pageSize: 12,
         total: ref(1)
     }),
     getters: {
@@ -37,11 +50,15 @@ export const useStore = defineStore("main", {
         }
     },
     actions: {
-        async getProducts(amount?: number, query?: string, page?: number) {
+        async getProducts(page?: number) {
             const results = await productsService.getItems({
-                q: query ? `name:${query}*` : undefined,
+                q: searchParamsMapper(
+                    this.query,
+                    this.filters.types.filter(filter => filter.checked),
+                    this.filters.sets.filter(filter => filter.checked)
+                ),
                 page: page ? page : undefined,
-                pageSize: amount ? amount : undefined
+                pageSize: this.pageSize
             })
             .then(result => {
                 this.products = result.data;
@@ -65,11 +82,27 @@ export const useStore = defineStore("main", {
                 }))
             });
         },
-        changePage(page: number, query: string) {
-            this.getProducts(12, query, page);
+        changePage() {
+            this.getProducts(this.page);
         },
-        changeCheckedValue(filter: IType | ISetWChecked) {
+        changeCheckedTypeValue(filter: IType) {
+            // TODO: Only change 1 check value
             filter.checked = !filter.checked;
+            
+            if (filter.checked) {
+                this.getProducts()
+            } else {
+                this.getProducts(this.page)
+            }
+        },
+        changeCheckedSetValue(filter: ISetWChecked) {
+            filter.checked = !filter.checked;
+            
+            if (filter.checked) {
+                this.getProducts()
+            } else {
+                this.getProducts(this.page)
+            }
         },
         addToCart(value: IProduct) {
             this.cart.push(value);

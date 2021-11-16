@@ -41,7 +41,7 @@ export default defineComponent({
         const store = useStore();
 
         function removeFilter(type: IType) {
-            store.changeCheckedValue(type);
+            store.changeCheckedTypeValue(type);
         }
 
         return {

@@ -27,8 +27,8 @@ export default defineComponent({
         const searchTerm = ref('');
 
         const getSearchResults = debounce(() => {
-            store.getProducts(12, searchTerm.value);
             store.query = searchTerm.value;
+            store.getProducts();
         }, 300);
         
         return {

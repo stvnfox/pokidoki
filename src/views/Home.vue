@@ -16,7 +16,7 @@
             v-model="store.page"
             :total-page="store.total / 12"
             class="mb-5"
-            @change="store.changePage(store.page, store.query)"
+            @change="store.changePage()"
           />
         </div>
         </div>
@@ -45,7 +45,7 @@ export default defineComponent({
     }
   },
   mounted() {
-    this.store.getProducts(12, this.store.query, 1)
+    this.store.getProducts(this.store.page)
   }
 });
 </script>

@@ -17,3 +17,7 @@ export interface ISet {
         logo: string;
     }
 }
+
+export interface ISetWChecked extends ISet {
+    checked: boolean;
+}
