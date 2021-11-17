@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="container my-5">
         <h1>Cart</h1>
         <div class="card-row">
             <product
