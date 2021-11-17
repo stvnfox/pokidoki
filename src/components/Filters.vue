@@ -36,7 +36,7 @@
                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
             </button>
-            <div id="sets" class="collapse show">
+            <div id="sets" class="collapse">
                 <div class="filters__type-items-search mb-3">
                     <input v-model="searchSets" type="text" class="form-input" />
                     <button class="btn btn-secondary p-2">

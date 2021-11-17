@@ -12,21 +12,47 @@
             </svg>
         </button>
     </div>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 pb-5">
-        <product
-            v-for="item in items"
-            :key="item.id"
-            :product="item"
-        />
+    <div>
+        <Promised :promise="getResults">
+            <template v-slot:combined="{ isPending }">
+                <transition name="fade" mode="out-in">
+                    <template v-if="isPending">
+                        <div class="results" key="loading">
+                            <div class="spinner-border text-success" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-else-if="items.length > 0">
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 pb-5" key="result">
+                            <transition-group name="fade">
+                                <product
+                                    v-for="item in items"
+                                    :key="item.id"
+                                    :product="item"
+                                />
+                            </transition-group>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div class="results" key="noResults">
+                            <h2>
+                                No results found    
+                            </h2>    
+                        </div> 
+                    </template>
+                </transition>
+            </template>
+        </Promised>
     </div>
 </template>
 
 <script lang="ts">
-import { IType, useStore } from '@/store/useShop'
-import { defineComponent, PropType } from 'vue'
-import Product from '@/components/Product.vue'
+import { IType, useStore } from '@/store/useShop';
+import { defineComponent, PropType, ref } from 'vue';
+import { Promised } from 'vue-promised';
+import Product from '@/components/Product.vue';
 import { IProduct } from '@/interfaces/IProduct';
-import { ISetWChecked } from '@/interfaces/ISet';
 
 export default defineComponent({
     props: {
@@ -37,19 +63,25 @@ export default defineComponent({
     },
     components: {
         Product,
+        Promised
     },
     setup() {
         const store = useStore();
+        const getResults = ref<Promise<IProduct[]>|null>(null);
 
         function removeFilter(filter: IType) {
             filter.checked = !filter.checked;
-            store.getProducts(store.page)
+            store.getProducts(store.currentPage)
         }
 
         return {
+            getResults,
             store,
             removeFilter
         }
+    },
+    mounted() {
+        this.getResults = this.store.getProducts();
     }
 })
 </script>

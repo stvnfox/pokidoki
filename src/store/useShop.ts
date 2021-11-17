@@ -35,10 +35,39 @@ export const useStore = defineStore("main", {
         },
         cart: [] as IProduct[],
         activeFilter: [] as any[],
+        loading: ref(false),
         query: ref(''),
-        page: ref(1),
-        pageSize: 12,
-        total: ref(1)
+        currentPage: ref(1),
+        pageSize: ref(12),
+        pageSizeValues: ['12', '24', '48', '96'],
+        total: ref(1),
+        orderBy: ref(''),
+        orderByValues: [
+            {
+                displayValue: 'Alphabetical (A-Z)',
+                realValue: 'name',
+            },
+            {
+                displayValue: 'Alphabetical (Z-A)',
+                realValue: '-name',
+            },
+            {
+                displayValue: 'Price (ascending)',
+                realValue: 'cardmarket.prices.trendPrice',
+            },
+            {
+                displayValue: 'Price (descending)',
+                realValue: '-cardmarket.prices.trendPrice',
+            },
+            {
+                displayValue: 'Date (ascending)',
+                realValue: 'set.releaseDate',
+            },
+            {
+                displayValue: 'Date (descending)',
+                realValue: '-set.releaseDate',
+            },
+        ]
     }),
     getters: {
         checkedFilters: (state) => {
@@ -51,19 +80,26 @@ export const useStore = defineStore("main", {
     },
     actions: {
         async getProducts(page?: number) {
-            const results = await productsService.getItems({
+            this.loading = true;
+
+            return productsService.getItems({
                 q: searchParamsMapper(
                     this.query,
                     this.filters.types.filter(filter => filter.checked),
                     this.filters.sets.filter(filter => filter.checked)
                 ),
                 page: page ? page : undefined,
-                pageSize: this.pageSize
+                pageSize: this.pageSize,
+                orderBy: this.orderBy
             })
             .then(result => {
                 this.products = result.data;
-                this.page = result.page;
+                this.currentPage = result.page;
                 this.total = result.totalCount;
+                return result.data
+            })
+            .finally(() => {
+                this.loading = false;
             });
         },
         async getFilters() {
@@ -83,7 +119,7 @@ export const useStore = defineStore("main", {
             });
         },
         changePage() {
-            this.getProducts(this.page);
+            this.getProducts(this.currentPage);
         },
         changeCheckedTypeValue(filter: IType) {
             this.filters.types = this.filters.types.map(type => {

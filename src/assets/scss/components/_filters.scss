@@ -1,6 +1,7 @@
 .filters {
     position: sticky;
-    top: px-to-rem(276px);
+    top: px-to-rem(329px);
+    margin-bottom: 40px;
 
     &__type {
         margin-bottom: px-to-rem(12px);
@@ -70,7 +71,7 @@
     &__active {
         display: flex;
         position: sticky;
-        top: 17.2rem;
+        top: px-to-rem(329px);
         z-index: $zindex-fixed;
         background: $gray-100;
 

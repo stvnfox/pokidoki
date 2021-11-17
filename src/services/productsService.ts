@@ -11,7 +11,8 @@ interface IResult {
 interface IParams {
     q?: string,
     page?: number,
-    pageSize?: number
+    pageSize?: number,
+    orderBy?: string
 }
 
 export default new class ProductsService {

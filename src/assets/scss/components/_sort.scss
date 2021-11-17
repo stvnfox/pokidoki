@@ -1,0 +1,25 @@
+.search-sort {
+    position: sticky;
+    top: px-to-rem(275px);
+    z-index: $zindex-fixed;
+    background: $gray-100;
+
+    .sort {
+        display: flex;
+        align-items: center;
+        margin-left: px-to-rem(16px);
+    
+        label {
+            font-weight: $font-weight-bold;
+            font-size: $font-size-lg;
+            color: $gray-700;
+            margin-right: px-to-rem(8px);
+        }
+    
+        .form-select {
+            &:focus {
+                box-shadow: none;
+            }
+        }
+    }
+}
