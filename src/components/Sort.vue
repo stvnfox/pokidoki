@@ -29,7 +29,7 @@ export default defineComponent({
         const store = useStore();
 
         const getSortedProducts = () => {
-            store.getProducts(store.currentPage);
+            store.getProducts();
         }
 
         const changePageSize = () => {
