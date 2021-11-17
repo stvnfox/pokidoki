@@ -88,17 +88,13 @@ export const useStore = defineStore("main", {
         changeCheckedTypeValue(filter: IType) {
             this.filters.types = this.filters.types.map(type => {
                 if (type.name === filter.name) {
-                    return { ...type, checked: true }
+                    return { ...type, checked: !type.checked }
                 } else {
                     return { ...type, checked: false }
                 }
             })
             
-            if (filter.checked) {
-                this.getProducts()
-            } else {
-                this.getProducts(this.page)
-            }
+            this.getProducts(1)
         },
         changeCheckedSetValue(filter: ISetWChecked) {
             this.filters.sets = this.filters.sets.map(set => {
@@ -109,11 +105,7 @@ export const useStore = defineStore("main", {
                 }
             })
             
-            if (filter.checked) {
-                this.getProducts()
-            } else {
-                this.getProducts(this.page)
-            }
+            this.getProducts(1)
         },
         addToCart(value: IProduct) {
             this.cart.push(value);

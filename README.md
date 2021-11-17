@@ -26,5 +26,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### TODO: 
     - Spinner when loading data
+    - Show message when no result found/no pagination
+    - Only show filters that are possible?
+    - Build a custom pagination?
     - Sort results on price/name/date
     - Detail page
