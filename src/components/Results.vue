@@ -26,6 +26,7 @@ import { IType, useStore } from '@/store/useShop'
 import { defineComponent, PropType } from 'vue'
 import Product from '@/components/Product.vue'
 import { IProduct } from '@/interfaces/IProduct';
+import { ISetWChecked } from '@/interfaces/ISet';
 
 export default defineComponent({
     props: {
@@ -40,8 +41,9 @@ export default defineComponent({
     setup() {
         const store = useStore();
 
-        function removeFilter(type: IType) {
-            store.changeCheckedTypeValue(type);
+        function removeFilter(filter: IType) {
+            filter.checked = !filter.checked;
+            store.getProducts(store.page)
         }
 
         return {
