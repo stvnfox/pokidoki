@@ -86,8 +86,13 @@ export const useStore = defineStore("main", {
             this.getProducts(this.page);
         },
         changeCheckedTypeValue(filter: IType) {
-            // TODO: Only change 1 check value
-            filter.checked = !filter.checked;
+            this.filters.types = this.filters.types.map(type => {
+                if (type.name === filter.name) {
+                    return { ...type, checked: true }
+                } else {
+                    return { ...type, checked: false }
+                }
+            })
             
             if (filter.checked) {
                 this.getProducts()
@@ -96,7 +101,13 @@ export const useStore = defineStore("main", {
             }
         },
         changeCheckedSetValue(filter: ISetWChecked) {
-            filter.checked = !filter.checked;
+            this.filters.sets = this.filters.sets.map(set => {
+                if (set.id === filter.id) {
+                    return { ...set, checked: !set.checked }
+                } else {
+                    return { ...set, checked: false }
+                }
+            })
             
             if (filter.checked) {
                 this.getProducts()
