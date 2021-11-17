@@ -66,6 +66,20 @@
                 }
             }
         }
+
+        &:last-of-type {
+            .btn-filter {
+                svg {
+                    transform: rotate(0deg);
+                }
+
+                &:focus {
+                    svg {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+        }
     }
 
     &__active {

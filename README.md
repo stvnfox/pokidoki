@@ -27,7 +27,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### TODO: 
     - Build a custom pagination?
     - Photo skeleton in product
-    - Sort results on price/name/date
     - Show notice when product added to cart
     - Detail page
     - Cart page

@@ -24,7 +24,7 @@
                         </div>
                     </template>
                     <template v-else-if="items.length > 0">
-                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 pb-5" key="result">
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 pb-5" key="result">
                             <transition-group name="fade">
                                 <product
                                     v-for="item in items"
