@@ -1,7 +1,7 @@
 <template>
     <div class="col product">
         <div class="card pt-4">
-            <img :src="product.images.small" :alt="product.name">
+            <img :src="product.images.small" :alt="product.name" class="skeleton">
             <div class="card-body">
                 <h2 class="text-center" v-text="product.name" />
             </div>
