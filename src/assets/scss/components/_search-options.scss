@@ -2,7 +2,7 @@
     position: sticky;
     top: px-to-rem(129px);
     background: $gray-100;
-    z-index: $zindex-modal;
+    z-index: $zindex-fixed;
 
     &-options {
         .searchbar {

@@ -10,8 +10,11 @@
                     € {{ Math.ceil(product.cardmarket.prices.trendPrice) }},-
                 </h3>
                 <button
+                    type="button"
+                    data-bs-toggle="modal"
+                    :data-bs-target="cart ? '#remove-message' : '#add-message'"
                     class="btn btn-secondary"
-                    @click="cart ? store.removeFromCart(index) : store.addToCart(product)"
+                    @click="cart ? removeFromCart(index) : addToCart(product)"
                 >
                     {{ cart ? 'Remove from' : 'Add to' }} cart
                 </button>
@@ -25,7 +28,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { useStore } from '@/store/useShop'
+import { useStore } from '@/store/useShop';
 import { IProduct } from '@/interfaces/IProduct';
 
 export default defineComponent({
@@ -46,8 +49,18 @@ export default defineComponent({
     setup() {
         const store = useStore();
 
+        const addToCart = (product: IProduct) => {
+            store.addToCart(product);
+        }
+
+        const removeFromCart = (product: number) => {
+            store.productIndex = product;
+        }
+
         return {
-            store
+            store,
+            addToCart,
+            removeFromCart
         }
     },
 })

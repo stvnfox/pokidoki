@@ -10,17 +10,20 @@
                 cart
             />
         </div>
+        <modal :cart="true"/>
     </section>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore } from '@/store/useShop';
+import Modal from '@/components/Modal.vue';
 import Product from '@/components/Product.vue';
 
 export default defineComponent({
     components: {
-        Product,
+        Modal,
+        Product
     },
     setup() {
         const store = useStore();

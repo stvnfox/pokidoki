@@ -26,6 +26,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### TODO: 
     - Build a custom pagination?
-    - Show notice when product added to cart
+    - Save cart items in cookies?
     - Detail page
     - Cart page

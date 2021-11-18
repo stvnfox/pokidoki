@@ -28,6 +28,7 @@
         </transition>
       </div>
     </div>
+    <modal/>
   </div>
 </template>
 
@@ -35,6 +36,7 @@
 import { defineComponent } from "vue";
 import { useStore } from "@/store/useShop";
 import Filters from "@/components/Filters.vue";
+import Modal from '@/components/Modal.vue';
 import Results from "@/components/Results.vue";
 import Searchbar from "@/components/Searchbar.vue";
 import Sort from "@/components/Sort.vue";
@@ -42,6 +44,7 @@ import Sort from "@/components/Sort.vue";
 export default defineComponent({
   components: {
     Filters,
+    Modal,
     Results,
     Searchbar,
     Sort

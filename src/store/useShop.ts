@@ -14,7 +14,7 @@ const searchParamsMapper = (searchQuery: string, typeFilter: IType[], setFilter:
     const searchParamsEntries :string[] = [];
 
     if (searchQuery) {
-        searchParamsEntries.push(`name:${searchQuery}`);
+        searchParamsEntries.push(`name:${searchQuery}*`);
     }
     if (typeFilter.length > 0) {
         searchParamsEntries.push(`types:${typeFilter[0].name}`);
@@ -42,6 +42,7 @@ export const useStore = defineStore("main", {
         pageSizeValues: ['12', '24', '48', '96'],
         total: ref(1),
         orderBy: ref(''),
+        productIndex: ref(0),
         orderByValues: [
             {
                 displayValue: 'Alphabetical (A-Z)',
