@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { IProduct } from "@/interfaces/IProduct";
 import productsService from "@/services/productsService";
 import filterService from "@/services/filterService";
+import storeCartService from "@/services/storeCartService";
 import { ISet, ISetWChecked } from "@/interfaces/ISet";
 import { ref } from "vue";
 
@@ -144,11 +145,19 @@ export const useStore = defineStore("main", {
             
             this.getProducts(1)
         },
-        addToCart(value: IProduct) {
+        addToCart(key: string, value: IProduct) {
             this.cart.push(value);
+            storeCartService.setItem(key, this.cart);
         },
-        removeFromCart(value: number) {
+        removeFromCart(key: string, value: number) {
             this.cart.splice(value, 1);
+            storeCartService.setItem(key, this.cart);
         },
+        setSessionItem(key: string, value: any) {
+            storeCartService.setItem(key, value);
+        },
+        getSessionItem(key: string) {
+            this.cart = storeCartService.getItem(key);
+        }
     }
 })

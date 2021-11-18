@@ -17,7 +17,7 @@
             </div>
             <div class="modal-footer">
                 <div v-if="cart">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="removeFromCart">Remove</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="removeFromCart('cart')">Remove</button>
                 </div>
                 <div v-else>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue shopping</button>
@@ -49,8 +49,8 @@ export default defineComponent({
             router.push('/cart')
         }
 
-        const removeFromCart = () => {
-            store.removeFromCart(store.productIndex);
+        const removeFromCart = (key: string)  => {
+            store.removeFromCart(key, store.productIndex);
         }
 
         return {

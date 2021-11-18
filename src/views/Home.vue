@@ -35,6 +35,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useStore } from "@/store/useShop";
+import { IProduct } from "@/interfaces/IProduct";
 import Filters from "@/components/Filters.vue";
 import Modal from '@/components/Modal.vue';
 import Results from "@/components/Results.vue";
@@ -57,7 +58,8 @@ export default defineComponent({
     }
   },
   mounted() {
-    this.store.getProducts(this.store.currentPage)
+    this.store.getProducts(this.store.currentPage);
+    this.store.getSessionItem('cart');
   }
 });
 </script>

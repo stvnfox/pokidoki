@@ -14,7 +14,7 @@
                     data-bs-toggle="modal"
                     :data-bs-target="cart ? '#remove-message' : '#add-message'"
                     class="btn btn-secondary"
-                    @click="cart ? removeFromCart(index) : addToCart(product)"
+                    @click="cart ? removeFromCart(index) : addToCart('cart', product)"
                 >
                     {{ cart ? 'Remove from' : 'Add to' }} cart
                 </button>
@@ -49,8 +49,8 @@ export default defineComponent({
     setup() {
         const store = useStore();
 
-        const addToCart = (product: IProduct) => {
-            store.addToCart(product);
+        const addToCart = (key: string, product: IProduct) => {
+            store.addToCart(key, product);
         }
 
         const removeFromCart = (product: number) => {
