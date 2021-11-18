@@ -36,8 +36,5 @@ export default defineComponent({
             store
         }
     },
-    mounted() {
-        console.log(this.store.cart)
-    }
 })
 </script>
