@@ -123,6 +123,21 @@ export const useStore = defineStore("main", {
         changePage() {
             this.getProducts(this.currentPage);
         },
+        goToFirstPage() {
+            this.currentPage = 1;
+        },
+        prevPage() {
+            this.currentPage--
+        },
+        nextPage() {
+            this.currentPage++
+        },
+        goToLastPage() {
+            this.currentPage = Math.ceil(this.total / this.pageSize);
+        },
+        goToPage(value: number) {
+            this.currentPage = value;
+        },
         changeCheckedTypeValue(filter: IType) {
             this.filters.types = this.filters.types.map(type => {
                 if (type.name === filter.name) {

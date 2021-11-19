@@ -9,7 +9,7 @@
         border-right: $border-base;
         border-top: $border-base;
         border-bottom: $border-base;
-        width: px-to-rem(32px);
+        min-width: px-to-rem(32px);
         height: px-to-rem(32px);
 
         &:first-of-type {
@@ -21,29 +21,31 @@
         &:last-of-type {
             border-top-right-radius: $border-radius;
             border-top-right-radius: $border-radius;
-
-            a {
-                font-size: $font-size-lg;
-            }
         }
         
         &.active {
-            a,
-            a:hover {
+            button,
+            button:hover {
                 color: $orange;
             }
         }
 
         &.disabled {
-            a {
+            button {
                 opacity: 0.5;
                 cursor: auto;
+
+                &:hover {
+                    color: $gray-600;
+                }
             }
         }
 
-        a {
+        button {
             color: $gray-600;
             text-decoration: none;
+            background: none;
+            border: none;
             font-weight: $font-weight-bold;
             transition: color .2s ease-in-out;
 

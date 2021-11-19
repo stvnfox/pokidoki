@@ -14,7 +14,6 @@
     "core-js": "^3.6.5",
     "lodash": "^4.17.21",
     "pinia": "^2.0.2",
-    "uiv": "^2.0.0-alpha.0",
     "vue": "^3.2.21",
     "vue-promised": "^2.2.0",
     "vue-router": "^4.0.0-0"

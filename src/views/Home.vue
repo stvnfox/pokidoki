@@ -17,12 +17,11 @@
       <div class="col-lg-10">
         <results :items="store.products"/>
         <transition name="fade" mode="out-in">
-          <div v-if="store.products.length > 0" class="uiv">
+          <div v-if="store.products.length > 0">
             <pagination
-              v-model="store.currentPage"
-              :total-page="store.total / store.pageSize"
-              class="mb-5"
-              @change="store.changePage()"
+              :total-pages="store.total / store.pageSize"
+              :current-page="store.currentPage"
+              :per-page="store.pageSize"
             />
           </div>
         </transition>
@@ -35,9 +34,9 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useStore } from "@/store/useShop";
-import { IProduct } from "@/interfaces/IProduct";
 import Filters from "@/components/Filters.vue";
 import Modal from '@/components/Modal.vue';
+import Pagination from '@/components/Pagination.vue';
 import Results from "@/components/Results.vue";
 import Searchbar from "@/components/Searchbar.vue";
 import Sort from "@/components/Sort.vue";
@@ -46,6 +45,7 @@ export default defineComponent({
   components: {
     Filters,
     Modal,
+    Pagination,
     Results,
     Searchbar,
     Sort
