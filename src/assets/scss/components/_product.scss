@@ -1,0 +1,30 @@
+.product {
+    img {
+        height: px-to-rem(350px);
+        width: px-to-rem(245px);
+        object-fit: cover;
+        border-radius: $border-radius-lg;
+        margin: 0 auto;
+    }
+    
+    .skeleton {
+        animation: skeleton-loading 1s linear infinite alternate;
+    }
+
+    .card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: $gray-200;
+    }
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: $gray-100;
+    }
+
+    100% {
+        background-color: $gray-300;
+    }
+}

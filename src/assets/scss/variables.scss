@@ -1,0 +1,172 @@
+// Variables
+//
+// Variables should follow the `$component-state-property-size` formula for
+// consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
+
+// overriding the variables declared here: https://github.com/twbs/bootstrap/blob/v4.6.0/scss/_variables.scss
+
+@import "../../../node_modules/bootstrap/scss/functions";
+
+// Color system
+
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black:    #000 !default;
+
+$grays: ();
+
+$blue:    #007bff !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #dc3545 !default;
+$orange:  #fd7e14 !default;
+$yellow:  #ffc107 !default;
+$green:   #28a745 !default;
+$teal:    #20c997 !default;
+$cyan:    #17a2b8 !default;
+
+$colors: ();
+
+$primary:       $blue !default;
+$secondary:     $gray-600 !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         $gray-100 !default;
+$dark:          $gray-800 !default;
+
+$theme-colors: ();
+
+$body-bg: $gray-100;
+
+// Spacer Settings
+$spacer: 8px;
+$spacer-step: $spacer * .5;
+$spacers-max: 50;
+$spacers: () !default;
+
+@for $i from 1 through $spacers-max {
+    $spacers: map-merge($spacers, (
+        $i: ($i * $spacer-step),
+    ));
+}
+
+// Z-index master list
+//
+// Warning: Avoid customizing these values. They're used for a bird's eye view
+// of components dependent on the z-axis and are designed to all work together.
+
+$zindex-dropdown:                   1000;
+$zindex-sticky:                     1020;
+$zindex-fixed:                      1030;
+$zindex-offcanvas:                  1040;
+$zindex-modal-backdrop:             1050;
+$zindex-modal:                      1060;
+$zindex-popover:                    1070;
+$zindex-tooltip:                    1080;
+
+// Typography
+//
+// Font, line-height, and color for body text, headings, and more.
+
+$system-font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$system-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base: $system-font-family-sans-serif !default;
+
+$font-size-lg:                px-to-rem(18px);
+$font-size-base:              px-to-rem(16px);
+$font-size-sm:                px-to-rem(14px);
+
+$line-height-lg:              to-relative-line-height(32px, $font-size-lg);
+$line-height-base:            to-relative-line-height(24px, $font-size-base);
+$line-height-sm:              to-relative-line-height(20px, $font-size-sm);
+
+$h1-font-size:                px-to-rem(48px);
+$h2-font-size:                px-to-rem(32px);
+$h3-font-size:                px-to-rem(24px);
+$h4-font-size:                px-to-rem(20px);
+$h5-font-size:                $font-size-lg;
+$h6-font-size:                $font-size-base;
+
+$h1-line-height:              to-relative-line-height(64px, $h1-font-size);
+$h2-line-height:              to-relative-line-height(56px, $h2-font-size);
+$h3-line-height:              to-relative-line-height(48px, $h3-font-size);
+$h4-line-height:              to-relative-line-height(32px, $h4-font-size);
+$h5-line-height:              $line-height-lg;
+$h6-line-height:              $line-height-base;
+
+$font-weight-lighter:         lighter !default;
+$font-weight-light:           300;
+$font-weight-normal:          400;
+$font-weight-regular:         500;
+$font-weight-bold:            600;
+$font-weight-bolder:          bolder !default;
+
+$font-weight-base:            $font-weight-normal;
+
+$headings-margin-bottom:      $spacer;
+$headings-font-family:        null !default;
+$headings-font-weight:        $font-weight-bold;
+$headings-color:              null !default;
+
+$display-color:               $headings-color;
+
+$display1-size:               px-to-rem(64px);
+$display2-size:               px-to-rem(56px);
+$display3-size:               px-to-rem(48px);
+$display4-size:               px-to-rem(32px);
+
+$display1-line-height:        to-relative-line-height(82px, $display1-size);
+$display2-line-height:        to-relative-line-height(70px, $display2-size);
+$display3-line-height:        to-relative-line-height(64px, $display3-size);
+$display4-line-height:        to-relative-line-height(56px, $display4-size);
+
+$display1-weight:             $headings-font-weight;
+$display2-weight:             $headings-font-weight;
+$display3-weight:             $headings-font-weight;
+$display4-weight:             $headings-font-weight;
+
+$lead-font-size:              $font-size-lg;
+$lead-font-line-height:       $line-height-lg;
+$lead-font-weight:            $font-weight-base;
+
+// Root
+//
+// Settings for the `<html>` element.
+
+$root-text-rendering: optimizeLegibility;
+$root-webkit-font-smoothing: antialiased;
+$root-moz-osx-font-smoothing: grayscale;
+$root-min-width: 340px;
+
+// Selection
+//
+// Custom `::selection` styles
+
+$selection-bg: $primary;
+$selection-color: $white;
+
+// Floating Labels
+
+$floating-label-top: $font-size-sm + px-to-rem(6px);
+$floating-label-focus-indicator-width: 4px;
+$floating-label-focus-indicator-height: 4px;
+$floating-label-focus-indicator-border-radius: 50%;
+
+// Navbar
+
+$navbar-height: px-to-rem(88px);
+
+// Border
+
+$border-base: 1px solid $gray-300;

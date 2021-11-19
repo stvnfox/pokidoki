@@ -1,0 +1,30 @@
+.nav {
+    position: sticky;
+    top: 0;
+    background: $white;
+    padding: px-to-rem(32px) 0;
+    z-index: $zindex-fixed;
+    
+    &__cta {
+        a {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-left: 1rem;
+    
+            svg {
+                height: 1.5rem;
+                width: 1.5rem;
+            }
+
+            &.router-link-exact-active {
+                color: #42b983;
+            }
+        }
+        
+    }
+
+    a {
+        text-decoration: none;
+        color: $black;
+    }
+}
